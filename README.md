@@ -1,5 +1,5 @@
 # Watch_dogs-cctv-hack-system
 cctv hack system
 ## ToDo
-- いっぱい
+- exit camera hack mode when player press `esc`
  
