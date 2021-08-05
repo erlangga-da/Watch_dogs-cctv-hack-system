@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Scenes/Base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Scenes/cctv.tscn" type="PackedScene" id=2]
+
+[node name="World" type="Spatial"]
+
+[node name="Base" parent="." instance=ExtResource( 1 )]
+transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0 )
+
+[node name="KinematicBody" type="KinematicBody" parent="."]
+
+[node name="Camera" type="Camera" parent="KinematicBody"]
+
+[node name="Container" type="Spatial" parent="."]
+
+[node name="cctv" parent="Container" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2703, 10.0752, -11.9205 )
+
+[node name="cctv2" parent="Container" instance=ExtResource( 2 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -13.9572, 10.0752, 11.5369 )
