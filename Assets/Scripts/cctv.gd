@@ -5,6 +5,7 @@ onready var camera = $Cam/Camera
 onready var rayCast = $Cam/Camera/RayCast
 onready var Casthide = $Cam/Casthide
 onready var cctv_container = $"../Container/"
+onready var Player = $"../Player/"
 onready var castedNode
 onready var savedNode
 
@@ -17,12 +18,16 @@ var speed = 25
 
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	destination = self.translation
 	self.rotation_degrees.y = 0
 
 
 func _input(event):
+	
+	#if 'ESC' pressed
+	if event.is_action_pressed("ui_cancel"):
+		destination = Player.translation
+	
 	#if 'E' pressed 
 	if event.is_action_pressed("interact"):
 		#check if castedNode have a translation value
@@ -41,22 +46,36 @@ func _input(event):
 				camera.fov += 1
 	
 	#camera rotation
+	#when travel = true cam rotate blocked
 	if event is InputEventMouseMotion and !travel:
 		head.rotate_y(deg2rad(-event.relative.x * mouse_sens))
-		#camera.rotate_x(deg2rad(event.relative.y * mouse_sens))
 		
+		#max view angle up and down cctv camera
 		camera.rotate_x(deg2rad(event.relative.y * mouse_sens))
 		camera.rotation.x = clamp(camera.rotation.x, deg2rad(-50), deg2rad(50))
 		
+		#max view angle left and right cctv camera
 		var head_rotation = head.rotation_degrees
 		head_rotation.y = clamp(head_rotation.y, -70, 70)
 		head.rotation_degrees = head_rotation
 
 
 func _process(delta):
+	#back to player position (player mode)
+	if destination == Player.translation and !travel:
+		Player.currentCam = true
+		self.queue_free()
+	
+	#when in cctv mode set camera cctv to current
+	if !Player.currentCam :
+		camera.current = true
+	else:
+		camera.current = false
+	
 	if Casthide.is_colliding():
 		#set camera rotation when colliding
-		self.rotation_degrees = castedNode.rotation_degrees
+		if castedNode:
+			self.rotation_degrees = castedNode.rotation_degrees
 	
 	if rayCast.is_colliding():
 		#get staticBody name
@@ -65,7 +84,6 @@ func _process(delta):
 		#staticBody from Container node?? yes? = this is a cctv node , no? = not cctv
 		if castedNode.get_parent().get_name() == "Container":
 			castedNode.translation
-			#print("this node from Container")
 
 func _physics_process(delta):
 	#when the distance > 0.5 the camera is moving
@@ -79,7 +97,7 @@ func _physics_process(delta):
 
 #hide cctv when entered area
 func _on_HideRange_body_entered(body):
-	savedNode = castedNode
+	savedNode = body
 	savedNode.visible = false
 
 #show cctv when exit area
