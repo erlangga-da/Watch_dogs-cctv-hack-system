@@ -12,7 +12,11 @@ config_version=4
 
 config/name="Watch_dogs cctv hack system"
 run/main_scene="res://Assets/Scenes/World.tscn"
+boot_splash/image="res://icon.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon_rzJ_icon.ico"
 
 [input]
 
