@@ -1,8 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Scripts/cctv.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Shader/cctv_travel.shader" type="Shader" id=3]
+[ext_resource path="res://Assets/Shader/cctv_camera.shader" type="Shader" id=4]
 
 [sub_resource type="SphereShape" id=1]
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 3 )
+shader_param/color_1 = Plane( 0, 0, 0, 1 )
+shader_param/color_2 = Plane( 1, 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 4 )
+shader_param/crt_curve = 0.006
+shader_param/crt_scan_line_color = 0.0
+shader_param/aperture_grille_rate = 0.0
+shader_param/rf_switch_esque_blur = 0.778
+shader_param/white_noise_rate = 0.048
 
 [node name="KinematicBody" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -25,6 +40,80 @@ cast_to = Vector3( 0, 0, 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cam/HideRange"]
 shape = SubResource( 1 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -255.25, 68.75 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TravelShader" type="ColorRect" parent="Control"]
+material = SubResource( 8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CameraShader" type="ColorRect" parent="Control"]
+material = SubResource( 7 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -35.5
+margin_top = -7.0
+margin_right = 35.5
+margin_bottom = 7.0
+text = "[Q] Camera"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+anchor_top = 1.0
+anchor_right = 0.182
+anchor_bottom = 1.0
+margin_left = 36.0
+margin_top = -40.0
+margin_right = 80.632
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/HBoxContainer"]
+margin_top = 13.0
+margin_right = 58.0
+margin_bottom = 27.0
+text = "esc : exit"
+
+[node name="Label2" type="Label" parent="Control/HBoxContainer"]
+margin_left = 62.0
+margin_top = 13.0
+margin_right = 231.0
+margin_bottom = 27.0
+text = "        Mouse Wheel : Zoom"
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -5.0
+margin_top = -5.0
+margin_right = 5.0
+margin_bottom = 5.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="body_entered" from="Cam/HideRange" to="." method="_on_HideRange_body_entered"]
 [connection signal="body_exited" from="Cam/HideRange" to="." method="_on_HideRange_body_exited"]

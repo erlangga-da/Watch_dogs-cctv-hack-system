@@ -3,6 +3,7 @@ extends Spatial
 onready var head = $"."
 onready var camera = $Camera
 onready var raycast = $Camera/RayCast
+onready var Labelcctv = $Control/cctvLabel
 onready var cctv_container = $"../Container/"
 onready var worldNode = $"../"
 
@@ -17,9 +18,11 @@ var canSpawn = false
 var mouse_sens = 0.02
 
 func _ready():
+	Labelcctv.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event):
+	#spawn camera cctv
 	if event.is_action_pressed("set_cam") and canSpawn and currentCam:
 		var cctv = cctv_cam.instance()
 		self.get_parent().add_child(cctv)
@@ -46,6 +49,12 @@ func _process(delta):
 		#staticBody from Container node?? yes? = this is a cctv node , no? = not cctv
 		if castedNode.get_parent().get_name() == "Container":
 			spawnPosition = castedNode.translation
+			if currentCam:
+				Labelcctv.visible = true
+			else:
+				Labelcctv.visible = false
 			canSpawn = true
 		else:
 			canSpawn = false
+	else:
+		Labelcctv.visible = false

@@ -1,9 +1,15 @@
 extends KinematicBody
 
+#shader
+onready var TravelShader = $Control/TravelShader
+onready var CameraShader = $Control/CameraShader
+
+#node
 onready var head = $Cam
 onready var camera = $Cam/Camera
 onready var rayCast = $Cam/Camera/RayCast
 onready var Casthide = $Cam/Casthide
+onready var Labelcctv = $Control/Label
 onready var cctv_container = $"../Container/"
 onready var Player = $"../Player/"
 onready var castedNode
@@ -18,6 +24,9 @@ var speed = 25
 
 
 func _ready():
+	CameraShader.visible = false
+	TravelShader.visible = false
+	Labelcctv.visible = false
 	destination = self.translation
 	self.rotation_degrees.y = 0
 
@@ -28,8 +37,8 @@ func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		destination = Player.translation
 	
-	#if 'E' pressed 
-	if event.is_action_pressed("interact"):
+	#if 'Q' pressed 
+	if event.is_action_pressed("set_cam"):
 		#check if castedNode have a translation value
 		if castedNode:
 			destination = castedNode.translation
@@ -61,6 +70,12 @@ func _input(event):
 
 
 func _process(delta):
+	if travel:
+		TravelShader.visible = true
+		CameraShader.visible = false
+	else:
+		TravelShader.visible = false
+		CameraShader.visible = true
 	#back to player position (player mode)
 	if destination == Player.translation and !travel:
 		Player.currentCam = true
@@ -80,10 +95,12 @@ func _process(delta):
 	if rayCast.is_colliding():
 		#get staticBody name
 		castedNode = cctv_container.get_node(rayCast.get_collider().get_name())
-		
 		#staticBody from Container node?? yes? = this is a cctv node , no? = not cctv
 		if castedNode.get_parent().get_name() == "Container":
+			Labelcctv.visible = true
 			castedNode.translation
+	else:
+		Labelcctv.visible = false
 
 func _physics_process(delta):
 	#when the distance > 0.5 the camera is moving
