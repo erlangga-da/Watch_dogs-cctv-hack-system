@@ -1,5 +1,5 @@
 # Watch_dogs cctv-hack-system (GODOT)
-cctv hack system
+simple cctv hack system like watchdogs
 ## ToDo
 - [X] detect object via raycast
 - [X] camera zoom
@@ -16,6 +16,11 @@ cctv hack system
 - [ ] sound effect (maybe)
 - [ ] new cctv mesh (maybe)
 - [ ] new world scene (maybe)
+
+## Key Map
+- `Q` Interact with cctv
+- `esc` exit cctv
+- `Mouse wheel` zoom in/out
 
 ## Credit
 - Crt shader by arlez80 : https://godotshaders.com/shader/crt-shader/
