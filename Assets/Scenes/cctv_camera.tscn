@@ -6,12 +6,12 @@
 
 [sub_resource type="SphereShape" id=1]
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
 shader_param/color_1 = Plane( 0, 0, 0, 1 )
 shader_param/color_2 = Plane( 1, 1, 1, 1 )
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 4 )
 shader_param/crt_curve = 0.006
 shader_param/crt_scan_line_color = 0.0
@@ -28,7 +28,7 @@ script = ExtResource( 1 )
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
 [node name="RayCast" type="RayCast" parent="Cam/Camera"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 enabled = true
 cast_to = Vector3( 0, 0, 40 )
 
@@ -50,7 +50,7 @@ __meta__ = {
 }
 
 [node name="TravelShader" type="ColorRect" parent="Control"]
-material = SubResource( 8 )
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -58,7 +58,7 @@ __meta__ = {
 }
 
 [node name="CameraShader" type="ColorRect" parent="Control"]
-material = SubResource( 7 )
+material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {

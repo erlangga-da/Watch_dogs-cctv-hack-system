@@ -39,7 +39,7 @@ func _input(event):
 		camera.rotate_x(deg2rad(event.relative.y * mouse_sens))
 		camera.rotation.x = clamp(camera.rotation.x, deg2rad(-80), deg2rad(80))
 
-func _process(delta):
+func _process(_delta):
 	currentPos = self.translation
 	currentRot = self.rotation_degrees
 	if raycast.is_colliding():
