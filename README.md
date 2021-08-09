@@ -15,7 +15,7 @@ simple cctv hack system like watchdogs
 - [X] on/off shader
 - [ ] sound effect (maybe)
 - [ ] new cctv mesh (maybe)
-- [ ] new world scene (maybe)
+- [X] new world scene (maybe)
 
 ## Key Map
 - `Q` Interact with cctv
