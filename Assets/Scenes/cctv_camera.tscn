@@ -15,11 +15,11 @@ shader_param/color_2 = Plane( 1, 1, 1, 1 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 4 )
-shader_param/crt_curve = 0.006
+shader_param/crt_curve = 0.0
 shader_param/crt_scan_line_color = 0.0
-shader_param/aperture_grille_rate = 0.0
-shader_param/rf_switch_esque_blur = 0.778
-shader_param/white_noise_rate = 0.048
+shader_param/aperture_grille_rate = 0.286
+shader_param/rf_switch_esque_blur = 0.222
+shader_param/white_noise_rate = 0.092
 
 [node name="KinematicBody" type="KinematicBody"]
 script = ExtResource( 1 )

@@ -47,6 +47,7 @@ func _input(event):
 		#check if castedNode have a translation value
 		if castedNode:
 			destination = castedNode.translation
+			self.rotation_degrees = castedNode.rotation_degrees
 			
 	
 	#zoom
@@ -54,12 +55,12 @@ func _input(event):
 		if event.button_index == BUTTON_WHEEL_UP:
 			#max Zoom in Fov = 30
 			ZoomSound.play()
-			if camera.fov > 30:
+			if camera.fov >= 30:
 				camera.fov -= 1
 		elif event.button_index == BUTTON_WHEEL_DOWN:
 			#max zoom out Fov = 70
 			ZoomSound.play()
-			if camera.fov < 70:
+			if camera.fov <= 70:
 				camera.fov += 1
 	
 	#camera rotation
@@ -99,7 +100,6 @@ func _process(_delta):
 	if Casthide.is_colliding():
 		#set camera rotation when colliding
 		if castedNode:
-			#self.rotation_degrees = lerp(self.rotation_degrees, castedNode.rotation_degrees, 0.08)
 			self.rotation_degrees = castedNode.rotation_degrees
 	
 	if rayCast.is_colliding():
@@ -118,8 +118,6 @@ func _physics_process(_delta):
 		travel = true
 		direction = destination - transform.origin
 		direction = direction.normalized() * speed
-		if castedNode:
-			self.rotation_degrees = lerp(self.rotation_degrees, castedNode.rotation_degrees, 0.08)
 		move_and_slide(direction)
 	else:
 		travel = false

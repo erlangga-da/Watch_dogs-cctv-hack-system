@@ -10,8 +10,6 @@ onready var worldNode = $"../"
 onready var cctv_cam = preload("res://Assets/Scenes/cctv_camera.tscn")
 
 var castedNode
-var currentPos = Vector3()
-var currentRot = Vector3()
 var spawnPosition = Vector3()
 var currentCam = true
 var canSpawn = false
@@ -40,8 +38,6 @@ func _input(event):
 		camera.rotation.x = clamp(camera.rotation.x, deg2rad(-80), deg2rad(80))
 
 func _process(_delta):
-	currentPos = self.translation
-	currentRot = self.rotation_degrees
 	if raycast.is_colliding():
 		#get staticBody name
 		castedNode = cctv_container.get_node(raycast.get_collider().get_name())
