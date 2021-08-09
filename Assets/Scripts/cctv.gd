@@ -15,6 +15,10 @@ onready var Player = $"../Player/"
 onready var castedNode
 onready var savedNode
 
+#audio node
+onready var ZoomSound = $AudioZoom
+onready var RotateSound = $AudioRotate
+
 var direction
 var travel = false
 var destination = Vector3()
@@ -49,10 +53,12 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_WHEEL_UP:
 			#max Zoom in Fov = 30
+			ZoomSound.play()
 			if camera.fov > 30:
 				camera.fov -= 1
 		elif event.button_index == BUTTON_WHEEL_DOWN:
 			#max zoom out Fov = 70
+			ZoomSound.play()
 			if camera.fov < 70:
 				camera.fov += 1
 	
@@ -60,7 +66,6 @@ func _input(event):
 	#when travel = true cam rotate blocked
 	if event is InputEventMouseMotion and !travel:
 		head.rotate_y(deg2rad(-event.relative.x * mouse_sens))
-		
 		#max view angle up and down cctv camera
 		camera.rotate_x(deg2rad(event.relative.y * mouse_sens))
 		camera.rotation.x = clamp(camera.rotation.x, deg2rad(-50), deg2rad(50))
@@ -69,6 +74,7 @@ func _input(event):
 		var head_rotation = head.rotation_degrees
 		head_rotation.y = clamp(head_rotation.y, -70, 70)
 		head.rotation_degrees = head_rotation
+		RotateSound.play(0.50)
 
 
 func _process(_delta):
