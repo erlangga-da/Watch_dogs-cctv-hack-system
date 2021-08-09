@@ -13,7 +13,7 @@ simple cctv hack system like watchdogs
 - [X] shader black and white
 - [X] shader crt screen and noise
 - [X] on/off shader
-- [ ] sound effect (maybe)
+- [X] sound effect (maybe)
 - [ ] new cctv mesh (maybe)
 - [X] new world scene (maybe)
 
