@@ -19,7 +19,7 @@ transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0 )
 visible = false
 
 [node name="Player" type="Spatial" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -42.0421, 3.82379, -1.24503 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -28.1101, 3.82379, -1.24503 )
 script = ExtResource( 4 )
 
 [node name="Camera" type="Camera" parent="Player"]
@@ -73,17 +73,8 @@ material/0 = null
 
 [node name="Container" type="Spatial" parent="."]
 
-[node name="cctv2" type="StaticBody" parent="Container"]
-transform = Transform( -1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, -18.1138, 4.99541, -2.24793 )
-
-[node name="cctv" parent="Container/cctv2" instance=ExtResource( 2 )]
-
-[node name="CollisionShape" type="CollisionShape" parent="Container/cctv2"]
-transform = Transform( 1.51496, 0, 0, 0, 1, 0, 0, 0, 1.51496, 0, 0, 0 )
-shape = SubResource( 2 )
-
 [node name="cctv3" type="StaticBody" parent="Container"]
-transform = Transform( -0.4, 0, -6.03983e-08, 0, 0.4, 0, 6.03983e-08, 0, -0.4, -25.8663, 5.70318, 1.17117 )
+transform = Transform( -0.347408, 0, -0.198262, 0, 0.4, 0, 0.198262, 0, -0.347408, -21.6261, 5.70318, 1.17117 )
 
 [node name="cctv" parent="Container/cctv3" instance=ExtResource( 2 )]
 

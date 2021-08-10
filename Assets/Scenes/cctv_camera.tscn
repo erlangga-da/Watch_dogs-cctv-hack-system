@@ -34,10 +34,6 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0
 enabled = true
 cast_to = Vector3( 0, 0, 40 )
 
-[node name="Casthide" type="RayCast" parent="Cam"]
-enabled = true
-cast_to = Vector3( 0, 0, 4 )
-
 [node name="HideRange" type="Area" parent="Cam"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Cam/HideRange"]

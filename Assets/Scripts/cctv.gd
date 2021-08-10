@@ -43,12 +43,11 @@ func _input(event):
 		
 	
 	#if 'Q' pressed 
-	if event.is_action_pressed("set_cam"):
+	if event.is_action_pressed("set_cam") and Labelcctv.visible:
 		#check if castedNode have a translation value
 		if castedNode:
 			destination = castedNode.translation
-			self.rotation_degrees = castedNode.rotation_degrees
-			
+			self.rotation_degrees.y = lerp(self.rotation_degrees.y , castedNode.rotation_degrees.y , 2.0)
 	
 	#zoom
 	if event is InputEventMouseButton:
@@ -91,18 +90,14 @@ func _process(_delta):
 		Player.currentCam = true
 		self.queue_free()
 	
+	
 	#when in cctv mode set camera cctv to current
 	if !Player.currentCam :
 		camera.current = true
 	else:
 		camera.current = false
 	
-	if Casthide.is_colliding():
-		#set camera rotation when colliding
-		if castedNode:
-			self.rotation_degrees = castedNode.rotation_degrees
-	
-	if rayCast.is_colliding():
+	if rayCast.is_colliding() and !travel:
 		#get staticBody name
 		castedNode = cctv_container.get_node(rayCast.get_collider().get_name())
 		#staticBody from Container node?? yes? = this is a cctv node , no? = not cctv
@@ -118,12 +113,16 @@ func _physics_process(_delta):
 		travel = true
 		direction = destination - transform.origin
 		direction = direction.normalized() * speed
+		if castedNode:
+			self.rotation_degrees = lerp(self.rotation_degrees, castedNode.rotation_degrees, 0.08)
 		move_and_slide(direction)
 	else:
 		travel = false
 
 #hide cctv when entered area
 func _on_HideRange_body_entered(body):
+	self.rotation_degrees = body.rotation_degrees
+	self.translation = body.translation
 	savedNode = body
 	savedNode.visible = false
 
