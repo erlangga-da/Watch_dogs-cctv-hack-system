@@ -24,5 +24,6 @@ simple cctv hack system like watchdogs
 
 ## Credit
 - Crt shader by arlez80 : https://godotshaders.com/shader/crt-shader/
+- 3D cctv model by Jesse Ragos  : https://sketchfab.com/3d-models/cctv-camera-minimal-553ace160b8c4eb2a62b755ffdb7b6eb
 
 ありがとうございます!! (￣▽￣)
